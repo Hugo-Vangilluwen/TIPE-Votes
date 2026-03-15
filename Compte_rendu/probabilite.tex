@@ -1,0 +1,186 @@
+% !TeX root = TIPE_vangi.tex
+% !TeX spellcheck = fr
+
+\section{Probabilité des critères}
+
+\subsection{Calcul d'une probabilité d'un critère}
+
+John R. Chamberlin et Michael D. Cohen \cite{spatial_model} ont étudié plusieurs systèmes pour déterminer la probabilité d'élire le vainqueur de Condorcet sous réserve d'existence en utilisant une distribution spatiale des choix et des électeurs. Nous allons maintenant utiliser la culture de l'impartialité (nommé ainsi par ces deux auteurs) pour étendre ce calcul probabiliste à d'autres critères que celui de Condorcet.
+
+\begin{definition}
+	Soient $\V$ et $\W$ deux ensembles de votants disjoints et $\mathcal{R}$ un \textit{critère de vote} c'est-à-dire une relation binaire définie sur ${\D}^\V \times {\D}^\W$.
+	\begin{equation}
+		P_\mathcal{R} (\V, \W)
+		= \mathbb{P}_{\theta \sim \mathcal{U}({\D}^\V), \iota \sim \mathcal{U}({\D}^\W)}
+		\big[ \theta \; \mathcal{R} \; \iota \big]
+	\end{equation}
+	Où $\mathcal{U}(E)$ est la distribution uniforme sur  $E$. \\
+\end{definition}
+
+\noindent $\mathcal{R}$ est dite impartiale si, pour tous couples $(\theta, \iota) \in {\D}^\V \times {\D}^\W$ et $(\theta', \iota') \in {\D}^\V \times {\D}^\W$,
+\begin{enumerate}[label=$(\roman*)$]
+	\item permuter les préférences entre $\theta$ et $\theta'$ n'influence pas $\theta \sim \theta' \implies \left[ \theta \mathcal{R} \iota \iff \theta' \mathcal{R} \iota \right]$
+	\item permuter les préférences entre $\iota$ et $\iota'$ n'influence pas $\iota \sim \iota' \implies \left[ \theta \mathcal{R} \iota \iff \theta \mathcal{R} \iota' \right]$
+	\item permuter les choix de $\C$ n'influence pas
+	%			$\begin{gathered}
+		%				\forall \sigma \in \mathcal{S}_\C, \forall (A, B) \in \C^2, \\
+		%				\left[ \forall v \in \V, A \succ_{\theta_v} B \!\iff\! \sigma(A) \succ_{\theta'_v} \sigma(B) \right]
+		%				\wedge \left[ \forall w \in \W, A \succ_{\iota_w} B \!\iff\! \sigma(A) \succ_{\iota_w} \sigma(B) \right] \\
+		%				\implies \left[ \theta \mathcal{R} \iota \iff \theta' \mathcal{R} \iota' \right]
+		%			\end{gathered}$
+\end{enumerate}
+
+\noindent De même, un système de vote est impartial :
+\begin{itemize}
+	\item pour les votants si le résultat est invariant par permutation des votants
+	\item pour les choix si le résultat est invariant par permutation des choix
+	\item tout court si il est impartial pour les votants et pour les choix
+\end{itemize}
+
+
+\subsection{Critères impersonnels}
+
+Un critère de vote est dit impersonnel si il est défini pour $\W = \emptyset$ (avec la convention que, pour un ensemble quelconque $E$, nous avons $E^\emptyset = \{\emptyset\}$).
+
+\begin{theoreme}
+	\propriete{impersonnel d'invariance par impartialité}
+	Si $\mathcal{R}$ est impartiale alors,
+	en notant $S$ un système de représentant de $\nicefrac{{\D}^\V}{\sim}$,
+	\begin{equation}
+		P_\mathcal{R} (\V, \emptyset) =
+		\frac{1}{ \left|\D\right| ^ {\left|\V\right|} }
+		\sum_{\theta \in S} \left|\bar{\theta}\right|
+		\left(
+		\left\{\begin{matrix}
+			1 &\text{ si } \theta \;\mathcal{R}\; \emptyset \\
+			0 &\text{ sinon}
+		\end{matrix}\right.
+		\right)
+	\end{equation}
+	Cela permet de réduire grandement le nombre de calcul à effectuer.
+\end{theoreme}
+
+\begin{proof}
+	Adapter la démonstration de \hyperref[individuel d'invariance par impartialité]{la version individuel du théorème} sachant que $\nicefrac{{\D}^\emptyset}{\sim} = \{\emptyset\}$.
+\end{proof}
+
+\begin{definition}
+	\propriete{Critère de Condorcet}
+	Si il existe un vainqueur de Condorcet alors le système de vote devrait l'élire. L'unicité du gagnant de Condorcet n'est vrai que pour $\D = \mathfrak{O}$. \\
+	Posons l'ensemble des vainqueurs de Condorcet $VC$.
+	\begin{equation*}
+		VC = \left\{ \
+			x \in \C \; | \;
+			\forall y \in \C, \
+			\left|\left\{ v \in \V \;|\; x \succ_{\theta_v} y \right\}\right|
+			\geqslant \left|\left\{ v \in \V \;|\; y \succ_{\theta_v} x \right\}\right|
+		\ \right\}
+	\end{equation*}
+	Le critère de Condorcet est défini ainsi :
+	\begin{equation}
+		\theta \text{ Condorcet } \emptyset \iff
+		VC = \emptyset
+		\ \vee \
+		VC \cap M_{\SV(\theta)}(\C) \neq \emptyset
+	\end{equation}
+	Ce qui est équivalent à $VC \cap M_{\SV(\theta)}(\C) = \emptyset \implies VC = \emptyset$.
+\end{definition}
+
+\begin{definition}
+	\propriete{Critère d'unicité du vainqueur}
+	Ce critère indique si le vainqueur est unique.
+	\begin{equation}
+		\theta \text{ UV } \emptyset
+		\iff
+		\left| M_{\SV(\theta)}(\C) \right| = 1
+	\end{equation}
+\end{definition}
+
+\subsection{Critères individuels}
+
+Un critère de vote est dit individuel si il est défini pour un singleton $\W = \{w\}$ (avec la convention que, pour un ensemble quelconque $E$, nous avons $E^{\{w\}} = E$).
+
+\begin{theoreme}
+	\propriete{individuel d'invariance par impartialité}
+	Si $\mathcal{R}$ est impartiale alors,
+	en notant $S$ un système de représentant de $\nicefrac{{\D}^\V}{\sim}$ et $T$ un système de représentant  $\nicefrac{\D}{\sim}$,
+	\begin{equation}
+		P_\mathcal{R} (\V, \{w\}) =
+		\frac{1}{ \left|\D\right| ^ {\left|\V\right| + 1} }
+		\sum_{\theta \in S} \left|\bar{\theta}\right|
+		\left(
+		 \sum_{\iota \in T}
+		\left\{\begin{matrix}
+			\left|\bar{\iota}\right| &\text{ si } \theta \;\mathcal{R}\; \iota \\
+			0 &\text{ sinon}
+		\end{matrix}\right.
+		\right)
+	\end{equation}
+	Cela permet de réduire grandement le nombre de calcul à effectuer.
+\end{theoreme}
+
+\begin{proof}
+	Comme $\theta$ et $\iota$ suivent des lois uniforme, la probabilité est le nombre de cas où $\theta \mathcal{R} \iota$ est divisé par le nombre total de cas.
+	\begin{equation*}
+		P_\mathcal{R} (\V, \{w\}) =
+		\frac{ \left| \left\{
+			(\theta, \iota) \in {\D}^\V \times \D
+			\;|\; \theta \;\mathcal{R}\; \iota
+		\right\} \right| }{ \left|
+			{\D}^\V \times \D
+		\right| }
+	\end{equation*}
+	Nous remarquons que $\left| {\D}^\V \times \D \right| = \left|\D\right| ^ {\left|\V\right| + 1}$. \\
+	Utilisons l’impartialité de $\mathcal{R}$ pour décrire l'ensemble au numérateur en un union disjointe.
+	Sachant que ${\D}^\V$ est invariant pour toute permutations des choix, $(iii)$ permet de rassembler les éléments de $\D$.
+	\begin{equation*}
+		\left\{ (\theta, \iota) \in {\D}^\V \times \D \;|\; \theta \;\mathcal{R}\; \iota \right\}
+		= \coprod_{c \in \nicefrac{\D}{\sim}}
+		\left\{ (\theta, \iota) \in {\D}^\V \times c \;|\; \theta \;\mathcal{R}\; \iota \right\}
+	\end{equation*}
+	$(i)$ permet de rassembler les familles de ${\D}^\V$.
+	\begin{equation*}
+		\left\{ (\theta, \iota) \in {\D}^\V \times \D \;|\; \theta \;\mathcal{R}\; \iota \right\}
+		= \coprod_{c \in \nicefrac{\D}{\sim}}
+		\coprod_{c' \in \nicefrac{{\D}^\V}{\sim}}
+		\left\{ (\theta, \iota) \in c' \times c \;|\; \theta \;\mathcal{R}\; \iota \right\}
+	\end{equation*}
+	Pour chaque $c$ et $c'$, si un couple $(\theta, \iota)$ vérifie $\mathcal{R}$ alors tous les autres couples vérifient $\mathcal{R}$.
+	
+	\begin{equation*}
+		\begin{aligned}
+			\left| \left\{ (\theta, \iota) \in {\D}^\V \times \D \;|\; \theta \;\mathcal{R}\; \iota \right\} \right|
+			&= \sum_{\iota \in T} |\bar{\iota}|
+			\left| \coprod_{c' \in \nicefrac{{\D}^\V}{\sim}}
+			\left\{ \theta \in c' \;|\; \theta \;\mathcal{R}\; \iota \right\} \right| \\
+			&= \sum_{\iota \in T} |\bar{\iota}|
+			\sum_{\theta \in S}  |\bar{\theta}|
+			\left| \left\{ \theta \;\mathcal{R}\; \iota \right\} \right|
+		\end{aligned}
+	\end{equation*}
+	Les indices étant indépendants, nous pouvons les échanger. Ce qui conclut.
+\end{proof}
+
+\begin{definition}
+	\propriete{Critère d’honnêteté}
+	Ce critère indique si l'électeur ayant $\iota$ a intérêt à être honnête c'est-à-dire que sa préférence $\iota$ est le bulletin faisant le meilleur résultat du vote, du point de vue de l'électeur en question.
+	\begin{equation}
+		\theta \text{ Honnêteté } \iota \iff
+		\forall \iota' \in \D, \
+		\SV(\theta \cup \iota) \succ_\iota \SV(\theta \cup \iota')
+	\end{equation}
+	C'est un critère d'une importance capitale.
+\end{definition}
+
+\begin{definition}
+	\propriete{Critère de participation}
+	Ce critère indique si l'ajout de l'électeur modifie le résultat en faveur de celui-ci.
+	\begin{equation}
+		\theta \text{ Participation } \iota \iff
+		\SV(\theta \cup \iota) \succ_\iota \SV(\theta)
+	\end{equation}
+\end{definition}
+
+\subsection{Critères collectifs}
+
+Un critère de vote est dit collectif si il est défini pour $|\W| \geqslant 2$. Les critères précédents peuvent facilement être étendus.

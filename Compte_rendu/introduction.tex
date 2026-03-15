@@ -1,0 +1,20 @@
+% !TeX root = TIPE_vangi.tex
+% !TeX spellcheck = fr
+
+\section{Introduction}
+
+Les systèmes de vote c'est-à-dire les processus qui, à partir de préférences individuelles, donne la préférence collective sont un élément clef des démocraties modernes, permettant de recueillir directement l'avis du peuple. Le choix d'un mode de scrutin est crucial puisqu’il modifie le résultat et, surtout, la façon dont résonnent les électeurs (vote stratégique). Cependant, un tel choix est difficile de part le nombre de critères à vérifier et l'inexistence d'un système de vote parfait (voir le théorème d'Arrow et celui de Gibbard-Satterthwaite). Le respect ou non des critères est booléen. Dans ce TIPE, j'ai cherché un indicateur continu pour classer les systèmes de vote. J'ai étudié la probabilité pour qu'un profil de préférence respecte tel ou tel critère.
+
+Avant de lire ce document, je recommande les trois articles de Rémi Peyre \cite{math_démocratie}.
+
+Nous allons utiliser les notations de Lê Nguyên Hoang \cite{randomized_Condorcet}. Considérons un ensemble fini $\C$ de choix et un ensemble fini $\V$ de votants. Notons $\pO$ l'ensemble des \hyperref[Relation de préordre]{relations de préordre totales} sur $\C$ et $\mathfrak{O}$ l'ensemble des \hyperref[Relation d'ordre]{relations d'ordre totales} sur $\C$.
+
+\begin{definition}
+	\underline{Système de vote} \\
+	Soit $\D \in \mathcal{P}(\pO)$. Une fonction notée $\SV$ de ${\D}^\V$ dans $\pO$ est un système de vote dont $\D$ est le domaine de vote (qui indique la forme que devront prendre les bulletins).
+	\begin{equation}
+		\SV : {\D}^\V \rightarrow \pO
+	\end{equation}
+	Remarquons que le système peut être restreint à ${\D'}^\V$ que l'on notera $\SV_{|\D'}$. Par exemple, $\mathscr{S}_{|\mathfrak{O}}$. \\
+	Un élément de ${\D}^\V$ est appelé profil de préférence et représente les bulletins de chaque électeur distinctement.
+\end{definition}

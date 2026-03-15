@@ -1,0 +1,99 @@
+\documentclass[french,11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+% !TeX spellcheck = fr_FR
+
+\title{Probabilité des critères de vote \\ Compte rendu de TIPE}
+\author{\textit{Vangi}lluwen Hugo}
+\date{26 mai 2024}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	top=2cm,
+	bottom=2cm,
+	right=2cm,
+	left=2cm
+}
+
+% Formules mathématiques
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{nicefrac}
+\usepackage{mathrsfs}
+
+\usepackage{enumitem}
+
+\usepackage{hyperref}
+\makeatletter
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	citecolor=olive,
+	pdftitle={Compte rendu de TIPE},
+	pdfauthor={\@author}
+}
+\makeatother
+
+% Graphiques
+\usepackage{graphicx}
+\graphicspath{ {../simulation/figures/}}
+\usepackage[linguistics]{forest}
+\usepackage{subcaption}
+\usepackage{changepage}
+\usepackage{float}
+
+
+% Environnements
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem*{exemple}{Exemple}
+
+% Ensembles usuels en systèmes de votes
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\pO}{\mathcal{O}}
+\newcommand{\SV}{\mathscr{S}}
+\newcommand{\D}{\mathcal{D}_\mathcal{O}}
+
+\newcommand{\propriete}[1]{
+	\label{#1}
+	\underline{#1} \newline
+}
+
+
+\begin{document}
+	\maketitle
+
+	\begin{abstract}
+		En théorie du choix social, les systèmes de vote sont évalués par différents critères. Cependant, le respect ou non de ces critères est une information booléenne. C'est pour quoi j'ai cherché une façon plus nuancée d'évaluer les systèmes de vote. Je vais m'intéresser à la probabilité de respecter un certain critère en prenant un profil de préférence au hasard.
+	\end{abstract}
+
+	\tableofcontents
+
+	\include{introduction.tex}
+
+	\include{preordre.tex}
+
+	\include{probabilite.tex}
+
+	\include{système.tex}
+
+	\include{informatique.tex}
+
+	\include{conclusion.tex}
+
+	\addcontentsline{toc}{section}{Références}
+	\bibliographystyle{plain}
+	\bibliography{articles}
+\end{document}

@@ -1,0 +1,302 @@
+% !TeX root = TIPE_vangi.tex
+% !TeX spellcheck = fr
+
+\section{Simulations informatiques}
+
+\subsection{Représentation des différentes données}
+
+Tous les ensembles sont représenté par des listes de chaînes de caractères.
+Une préordre $\theta$ sont représenté pour $\varXi_\theta(\C)$ (qui est une liste de liste de chaînes de caractères) dans la classe \texttt{Preference}.
+
+La classe abstraite \texttt{Vote} décrit tous les systèmes de vote possibles avec les méthodes \texttt{\_\_init\_\_, voter, vainqueur, resultat, copier, \_\_repr\_\_}. Les systèmes de vote concrets en sont des enfants.
+
+\bigbreak
+\begin{figure}[H]
+	\centering
+	\begin{forest}
+		for tree={s sep=5mm, l=2cm}
+		[\texttt{Vote}
+			[\texttt{Pondere}
+				[\texttt{Uninominal}]
+				[\texttt{Borda}]
+				[\texttt{Approbation}]
+			]
+			[\texttt{Condorcet}
+				[\texttt{Black}]
+				[\texttt{Copeland}]
+				[\texttt{Schulze}]
+				[\texttt{GagnantCondorcet}]
+			]
+		]
+	\end{forest}
+\end{figure}
+\bigbreak
+
+Il faut calculer différents ensembles ($\C$, $\pO$, $\mathfrak{O}$), l’ensemble des applications ${\D}^\V$ et leurs systèmes de représentants.
+Cependant le calcul de leur cardinal est souvent bien plus simple que le calcul explicite des ensembles.
+C'est pourquoi ils sont décrits par la classe abstraite \texttt{Ensemble} que possède les méthodes \texttt{\_\_init\_\_, card = \_\_len\_\_, \_\_call\_\_}. Les classes fils implémentent les méthodes \texttt{\_calcul\_card} et \texttt{\_calcul\_ensemble} qui sont appelées, si besoin, puis mémoïsé par la classe mère.
+
+Le calcul de la probabilité se base sur \hyperref[individuel d'invariance par impartialité]{le théorème d'invariance par impartialité}.
+La somme sur $\mathcal{S}$ permet de paralléliser les calculs.
+
+Le code Python final fait 1500 lignes.
+
+\subsection{Graphes obtenus}
+\def \sgh {0.6} % scale graphe
+
+Nous allons étudier cinq systèmes de vote \textit{le scrutin uninominal, le méthode Borda, la méthode Black, le méthode de Copeland et la méthode de Schulze}.
+Le nombre d'électeurs est en abscisse et la probabilité en ordonnée.
+Les courbes bleus correspondent à deux choix, celles oranges à trois choix, celles vertes à quatre choix et celles rouges à cinq choix.
+Les courbes bleus sont identiques puisque, pour deux choix, tous les systèmes de vote étudiés coïncident avec le référendum.
+Sauf mention contraire, $\D = \mathfrak{O}$.
+\newline
+
+\begin{figure}[H]
+	\underline{Critère d'honnêteté}
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Uninominal_ordres_3_30.png}
+			\hfill
+			\includegraphics[scale=\sgh]{honnetete/graphe_Borda_ordres_3_30.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Black_ordres_3_30.png}
+			\hfill
+			\includegraphics[scale=\sgh]{honnetete/graphe_Copeland_ordres_3_30.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Schulze_ordres_3_25.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\underline{Critère de Condorcet} \\
+	Pour les systèmes de Condorcet, la probabilité vaut bien sûr 1.
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{critereCondorcet/graphe_Uninominal_ordres_3_30.png}
+			\hfill
+			\includegraphics[scale=\sgh]{critereCondorcet/graphe_Borda_ordres_3_30.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\underline{Critère d'unicité du vainqueur}
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Uninominal_ordres_3_30.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Borda_ordres_3_30.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Black_ordres_3_30.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Copeland_ordres_3_30.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Schulze_ordres_3_20.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\underline{Critère de particpation} \\
+	La probabilité de ce critère vaut 1 pour les votes pondérés d'après \hyperref[Vote pondéré croissant]{le théorème des votes pondérés croissants}.
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{participation/graphe_Black_ordres_3_30.png}
+			\hfill
+			\includegraphics[scale=\sgh]{participation/graphe_Copeland_ordres_3_30.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{participation/graphe_Schulze_ordres_3_20.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\underline{Avec plus de trois candidats} \\
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Uninominal_ordres_4_6.png}
+			\hfill
+			\includegraphics[scale=\sgh]{honnetete/graphe_Borda_ordres_4_6.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Black_ordres_4_6.png}
+			\hfill
+			\includegraphics[scale=\sgh]{honnetete/graphe_Copeland_ordres_4_6.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Schulze_ordres_4_5.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Uninominal_ordres_4_7.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Borda_ordres_4_7.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Black_ordres_4_6.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Copeland_ordres_4_6.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\underline{Avec de relations de préordre} \\
+	Maintenant, $\D = \pO$.
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Borda_préordres_3_10.png}
+			\hfill
+			\includegraphics[scale=\sgh]{honnetete/graphe_Black_préordres_3_9.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Copeland_préordres_3_9.png}
+			\hfill
+			\includegraphics[scale=\sgh]{honnetete/graphe_Schulze_préordres_3_8.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Borda_préordres_3_10.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Black_préordres_3_9.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Copeland_préordres_3_9.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Schulze_préordres_3_8.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{participation/graphe_Black_préordres_3_9.png}
+			\hfill
+			\includegraphics[scale=\sgh]{participation/graphe_Copeland_préordres_3_9.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{participation/graphe_Schulze_préordres_3_10.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+
+\begin{figure}[H]
+	\underline{Vote par approbation} \\
+	Ici, $\D = \{ \theta \in \pO \;|\; \left| \varXi_\theta(\C) \right| \leqslant 2 \}$.
+	Le vote par approbation respecte le critère de participation et celui de Condorcet.
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Approbation_préordresduals_3_20.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Approbation_préordresduals_3_25.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Approbation_préordresduals_5_5.png}
+			\hfill
+			\includegraphics[scale=\sgh]{unique_vainqueur/graphe_Approbation_préordresduals_5_6.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+	\noindent Dans le même domaine de vote, pour deux autres systèmes de vote :
+	\begin{adjustwidth}{-1cm}{-1cm}
+		\centering
+		\begin{subfigure}{1\linewidth}
+			\includegraphics[scale=\sgh]{honnetete/graphe_Copeland_préordresduals_3_15.png}
+			\hfill
+			\includegraphics[scale=\sgh]{honnetete/graphe_Schulze_préordresduals_3_10.png}
+		\end{subfigure}
+	\end{adjustwidth}
+\end{figure}

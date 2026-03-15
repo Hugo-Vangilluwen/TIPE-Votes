@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{hyperref}
+\begin{document}
+	
+	% This relies on the automatically created label
+	\hyperlink{section.1}{Link To Introduction} 
+	
+	\hyperref[secondsection]{test}
+	
+	\hyperref[firstappendix]{Appendix}
+	
+	% You might enjoy this, because it automatically includes the sectionname
+	\autoref{firstappendix} 
+	
+	\clearpage
+	% this will create an automatic label section.1 - 
+	% This will change if you add a section before this one!
+	\section{Introduction} 
+	\clearpage
+	\section{Second Section}\label{secondsection}
+	\clearpage
+	\appendix
+	\section{First Appendix}\label{firstappendix}
+	
+\end{document}

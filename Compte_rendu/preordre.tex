@@ -1,0 +1,313 @@
+% !TeX root = TIPE_vangi.tex
+% !TeX spellcheck = fr
+
+\section{Relations de préordre}
+
+\subsection{Définitions générales}
+
+\begin{definition}
+	\propriete{Relation de préordre}
+	Une relation de préordre ou simplement préordre $\theta$ ou $\succ_\theta$ sur $E$ est un relation binaire :
+	\begin{itemize}
+		\item \textbf{réflexive} : $\forall x \in E, x \succ_\theta x$
+		\item \textbf{transitive} : $\forall (x, y, z) \in E^3, [x \succ_\theta y \wedge y \succ_\theta z] \implies x \succ_\theta z$
+	\end{itemize}
+	Elle est dite \textbf{totale} si $\forall (x, y) \in E^2, x \succ_\theta y \vee y \succ_\theta x \vee x = y$.
+\end{definition}
+
+Notons $\pO$ l'ensemble des préordres totaux sur $\C$.
+Une relation de préordre est représenté par l'ensemble des candidats ordonnés et séparé par ">" ou "=".
+
+\begin{exemple}
+	A > D = C > B
+\end{exemple}
+
+\begin{definition}
+	\propriete{Relation d'ordre}
+	Une relation d'ordre $\theta$ sur $E$ est un relation de préordre :
+	\begin{itemize}
+		\item \textbf{antisymétrique} : $\forall (x, y) \in E^2, [x \succ_\theta y \wedge y \succ_\theta x] \implies x = y$
+	\end{itemize}
+\end{definition}
+
+
+Notons $\mathfrak{O}$ l'ensemble de relations d'ordre totales sur $\C$. Leur représentation ne contient aucun "=".
+
+\begin{exemple}
+	 D > B > C > A
+\end{exemple}
+
+\begin{definition}
+	\propriete{Relation d'équivalence}
+	Une relation d'ordre $\theta$ sur $E$ est un relation de préordre :
+	\begin{itemize}
+		\item \textbf{symétrique} : $\forall (x, y) \in E^2, x \succ_\theta y \implies y \succ_\theta x$
+	\end{itemize}
+\end{definition}
+
+
+\subsection{Relations induites}
+
+\begin{definition}
+	\propriete{majorants et minorants}
+	Soit $\theta \in \pO$ et $E \in \mathcal{P}(\C)$.
+	\begin{equation*}
+		M_\theta (E) = \left\{ x \in \C \;|\; \forall y \in \C, x \succ_\theta y \right\}
+	\end{equation*}
+	\begin{equation*}
+		m_\theta (E) = \left\{ x \in \C \;|\; \forall y \in \C, y \succ_\theta x \right\}
+	\end{equation*}
+\end{definition}
+
+\begin{proposition}
+	Si $E$ n'est pas vide, les majorants et les minorants ne le sont pas non plus.
+\end{proposition}
+
+\begin{proposition}
+	Pour une relation d'ordre totale, les deux ensembles ci-dessus sont des singletons.
+\end{proposition}
+
+\begin{definition}
+	\propriete{Relation de pseudo-égalité}
+	Soit $\theta \in \pO$. Soient $(x, y) \in \C^2$.
+	\begin{equation}
+		x \asymp_\theta y \iff x \succ_\theta y \wedge y \succ_\theta x
+	\end{equation}
+	$\asymp_\theta$ est une relation d'équivalence.
+\end{definition}
+
+\begin{proof}
+	~\newline
+	\begin{itemize}
+		\item \textit{Réflexivité} Soit $x \in \C$. Par réflexivité de $\theta$, $x \succ_\theta x$ donc $x \asymp_\theta x$.
+		\item \textit{Transitivité} Soit $(x, y, z) \in \C^3$ tel que $x \asymp_\theta y$ et $y \asymp_\theta z$.
+		Alors $x \succ_\theta y$ et $y \succ_\theta z$ donc $x \succ_\theta z$.
+		De même, $y \succ_\theta x$ et $z \succ_\theta x$ donc $z \succ_\theta x$.
+		D'où $x \asymp_\theta z$.
+		\item \textit{Symétrie} $\wedge$ est commutatif.
+	\end{itemize}
+\end{proof}
+
+\begin{theoreme}
+	Soit $\theta \in \pO$ et $E \in \mathcal{P}(\C)$.
+	\begin{equation*}
+		\max_\theta E \in \nicefrac{\C}{\asymp_\theta}
+		\quad \wedge \quad
+		\min_\theta E \in \nicefrac{\C}{\asymp_\theta}
+	\end{equation*}
+\end{theoreme}
+
+\begin{proof}
+	Traitons $\max$. La démonstration pour $\min$ est sensiblement la même. \\
+	Soit $(x, y) \in \left(\max_\theta E\right)^2$. Par définition de $\max$, comme $x \in \max_\theta E$ et $y \in \C$, $x \succ_\theta y$. De même, $y \succ_\theta x$. Ainsi $\forall (x, y) \in \left(\max_\theta E\right)^2, x \asymp_\theta y$.
+\end{proof}
+
+\begin{definition}
+	Le théorème précédent nous permet de définir l'application $\varXi_\theta$ pour $\theta \in \pO$ :
+	\begin{equation}
+		\varXi_\theta \
+		\left| \ \begin{matrix}
+			\mathcal{P}(\C) &\rightarrow& \underset{n = 0}{\overset{|\C|}{\bigcup}} \left(\nicefrac{\C}{\asymp_\theta}\right)^n \\
+			~\\
+			E &\mapsto& \left\{ \begin{matrix}
+				\emptyset &\text{si }& E = \emptyset \\
+				\left(\displaystyle \max_\theta E, \ \varXi_\theta\left(E \setminus \max_\theta E\right) \right) &\text{si }& E \neq \emptyset
+			\end{matrix} \right.
+		\end{matrix} \right.
+	\end{equation}
+	Avec, pour tout ensemble $E$, $E^0 = \emptyset$.
+\end{definition}
+
+\begin{exemple}
+	Pour $\C = \{A, B, C, D, E\}$ et $\theta = D > B = C = E > A$,
+	$\varXi(\C) = (\{D\}, \{B,C,E\}, \{A\})$
+\end{exemple}
+
+\begin{proposition}
+	\begin{equation*}
+		\forall \theta \in \pO, \
+		\forall E \in \mathcal{P}(\C), \
+		\varXi_\theta(E) \in \left(\nicefrac{\C}{\asymp_\theta}\right) ^ {\left|\nicefrac{E}{\asymp_\theta}\right|}
+	\end{equation*}
+	Visuellement, $\left| \varXi_\theta(\C) \right|$ est égal au nombre de '>' plus 1 dans la représentation de $\theta$.
+\end{proposition}
+
+\begin{proof}
+	Récurrence sur le cardinal de $E$.
+\end{proof}
+
+\begin{proposition}
+	$\varXi_\theta(E)$ forme une partition de $E$.
+\end{proposition}
+
+\begin{proof}
+	Récurrence sur le cardinal de $E$.
+\end{proof}
+
+
+\begin{definition}
+	\underline{Relation induite sur les parties de $\C$} \\
+	Soit $\theta \in \pO$. Soient $(E, F) \in \mathcal{P}(\C)^2$. \\
+	Sous réserve de non-vacuité, soient $x \in \max_\theta E \setminus (E \cap F)$ et $y \in \max_\theta F \setminus (E \cap F)$ quelconques.
+	\begin{equation}
+		E \succ_\theta F \iff
+		\left\{ \begin{matrix}
+			Vrai &si \ F = \emptyset \\
+			Faux &si \ E = \emptyset \ et \ F \neq \emptyset \\
+			x \succ_\theta y &si \ x \not \asymp_\theta y \\
+			E \!\setminus\! \{x\} \succ_\theta F \!\setminus\! \{y\} &si \ x \asymp_\theta y
+		\end{matrix} \right.
+	\end{equation}
+\end{definition}
+
+\begin{proposition}
+	Cette relation induite est un préordre.
+\end{proposition}
+
+\begin{proof}
+	Vérifions que cette relation est bien définie c'est-à-dire qu'elle ne dépend pas des éléments $x$ et $y$ choisis.
+	Soient $(x, x') \in \left( \max_\theta E \setminus (E \cap F) \right)^2$ et $(y, y') \in \left( \max_\theta F \setminus (E \cap F) \right)^2$.
+	
+	Supposons $x \not \asymp_\theta y$. Alors $x' \not \asymp_\theta y'$.
+	Montrons que $x \succ_\theta y \iff x' \succ_\theta y'$.
+	Sachant que $x' \succ_\theta x$ et $y \succ_\theta y'$, par transitivité, $x \succ_\theta y \implies x' \succ_\theta y'$.
+	Sachant que $x \succ_\theta x'$ et $y' \succ_\theta y$, par transitivité, $x' \succ_\theta y' \implies x \succ_\theta y$. D'où l'indépendance aux éléments $x$ et $y$ choisis si $x \not \asymp_\theta y$.
+	
+	Supposons $x \asymp_\theta y$. Alors $x' \asymp_\theta y'$. Ainsi, par récurrence immédiate, à force d'enlever des éléments de E et de F, soit l'un des deux devient vide soit $x \not \asymp_\theta y$.
+	C'est-à-dire que l'on retombe sur l'un des trois autres cas qui sont eux-mêmes indépendants des $x$ et $y$ choisis. Donc cette définition est indépendantes des éléments $x$ et $y$ choisis. Donc la relation induite sur les ensembles est bien définie.
+	
+	Soit $E \in \mathcal{P}(\C)$. Vérifions que $E \succ_\theta E$. Les ensembles dont on prend les maximum sont égaux. Ainsi, on applique récursivement le quatrième cas, jusqu'à que $E$ soit vide. Donc $E \succ_\theta E$ est vrai. Donc la relation induite est réflexive.
+	
+	Soient $(E, F, G) \in \mathcal{P}(\C)^3$ tels que $E \succ_\theta F$ et $F \succ_\theta G$. Transitivité à faire.
+\end{proof}
+
+\begin{definition}
+	\underline{Relation induite sur les préordres sur $\C$} \\
+	Soit $\theta \in \pO$. Soient $(\iota, \kappa) \in \pO^2$.
+	\begin{equation}
+		\iota \succ_\theta \kappa \iff
+		\left\{ \begin{matrix}
+			Vrai &si \ C = \emptyset \\
+			M_\iota(\C) \succ_\theta M_\kappa(\C) &si \ M_\iota(\C) \neq M_\kappa(\C) \\
+			\iota_{|\C \setminus M_\iota(\C)} \succ_\theta \kappa_{|C \setminus M_\kappa(\C)} &si \ M_\iota(\C) = M_\kappa(\C)
+		\end{matrix} \right.
+	\end{equation}
+	Cette relation permet donc de classer les résultats des systèmes de vote pour différents profils de préférence du point de vue d'un électeur fixé.
+\end{definition}
+
+\begin{proposition}
+	Cette relation induite est un préordre.
+\end{proposition}
+
+\begin{proof}
+	J'ai vraiment la flemme de faire cette démonstration.
+\end{proof}
+
+
+\subsection{Relations de permutation}
+
+\begin{definition}
+	\propriete{Relation de permutation sur les familles}
+	Soient $E$ et $F$ deux ensembles quelconques.
+	\begin{equation}
+		\forall \left(x,y\right) \in \left(E^F\right)^2\!, \;
+		x \sim y \iff
+		\exists \sigma \in \mathfrak{S}_F : x = \left(y_{\sigma(f)}\right)_{f \in F}
+	\end{equation}
+	Où $\mathfrak{S}_F$ est l'ensemble des permutations de $F$. \\
+\end{definition}
+
+\begin{proposition}
+	Cette relation est une relation d'équivalence. \\
+	Notons $S$ un système de représentant de $\nicefrac{{\D}^\V}{\sim}$.
+\end{proposition}
+
+\begin{proof}
+	~\newline
+	\begin{itemize}
+		\item \textit{Réflexivité} Soit $x \in E^F$. $Id_F$ est une permutation de $F$ donc $x \sim x$.
+		\item \textit{Transitivité} Soient $(x, y, z) \in \left(E^F\right)^3$ tels que $x \sim y$ et $y \sim z$.
+		Fixons $\sigma$ la permutation liant $x$ et $y$ et $\sigma'$ celle liant $y$ et $z$.
+		Alors $x = \left(y_{\sigma(f)}\right)_{f \in F} = \left(z_{\sigma \circ \sigma'(f)}\right)_{f \in F}$.
+		Or $\sigma \circ \sigma'$ est une permutation donc $x \sim z$.
+		\item \textit{Symétrie} Soient $(x, y) \in \left(E^F\right)^2$ tels que $x \sim y$.
+		Fixons $\sigma$ liant $x$ et $y$. Alors $\left(x_{Id_F(f)}\right)_{f \in F} = \left(y_{\sigma(f)}\right)_{f \in F}$.
+		$\sigma^{-1}$ existe et est une permutation. D'où $\left(x_{\sigma^{-1}(f)}\right)_{f \in F} = \left(y_{Id_F(f)}\right)_{f \in F}$. Donc $y \sim x$.
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	\propriete{Relation de permutation sur les préordres}
+	\begin{equation}
+		\forall (\theta, \iota) \in \pO^2\!, \
+		\theta \sim \iota \iff
+		\big[ \
+			\left|\nicefrac{\C}{\asymp_\theta}\right| = \left|\nicefrac{\C}{\asymp_\iota}\right|
+			\ \wedge \
+			\varXi_\theta(\C) \sim \varXi_\iota(\C)
+		\ \big]
+	\end{equation}
+\end{definition}
+
+\begin{proposition}
+	Cette relation est une relation d'équivalence.
+\end{proposition}
+
+\begin{proof}
+	Si $\left|\nicefrac{\C}{\asymp_\theta}\right| = \left|\nicefrac{\C}{\asymp_\iota}\right|$, $\varXi_\theta(\C)$ et $\varXi_\iota(\C)$ peuvent bien être comparé avec $\sim$ car ils appartiennent à la même famille ($\left(\nicefrac{\C}{\asymp_\theta}\right)^{\left|\nicefrac{E}{\asymp_\theta}\right|}$. Sinon, ils n'ont pas à être comparé. Donc $\sim$ est bien définie.
+	
+	$=$ et $\sim$ (sur les familles) sont des relations d'équivalence donc $\sim$ (sur les préordres) en est une aussi.
+\end{proof}
+
+\begin{proposition}
+	$\nicefrac{\mathfrak{O}}{\sim} = \{\mathfrak{O}\}$
+\end{proposition}
+
+\begin{proof}
+	Cela revient à montrer que toutes les relations d'ordres sont en relation par $\sim$.
+	
+	Commençons par montrer que $\forall \theta \in \mathfrak{O}, \nicefrac{\C}{\asymp_\theta} = \C$.
+	Soit $\theta \in \mathfrak{O}$. Soit $(A, B) \in \C^2$ tels que $A \neq B$.
+	Si $A \asymp_\theta B$ alors, par antisymétrie de $\theta$, $A = B$ ce qui est impossible.
+	Donc $A \not \asymp_\theta B$. Ainsi chaque classe d'équivalence ne contiennent qu'un seul élément.
+	Or les classes d'équivalence forment une partition de de $\C$. Donc $\nicefrac{\C}{\asymp_\theta} = \C$.
+	
+	Soit $(\theta, \iota) \in \mathfrak{O}^2$.
+	Nous avons $\left|\nicefrac{\C}{\asymp_\theta}\right| = \left|\C\right| = \left|\nicefrac{\C}{\asymp_\iota}\right|$.
+	D'après la proposition 3 et le calcul ci-dessus, la relation $\varXi_\theta(\C) \sim \varXi_\iota(\C)$ a un sens dans la famille $\C^{\left|\C\right|}$.
+	Posons l'application $\sigma : \C \rightarrow \C$ définie par $\forall k \in [\![1;|\C|]\!], \forall (A, B) \in \varXi_\theta(\C)_k \times \varXi_\iota(\C)_k, \ \sigma(A) = B$.
+	$\varXi_\iota(\C)_k$ est un singleton donc $\sigma$ est bien définie.
+	D'après la proposition 4, $\varXi_\iota(\C)$ est une partition de $\C$ donc $\sigma$ est surjective.
+	D'après l'accident du cardinal fini, $\sigma$ est bijective.
+	Ainsi $\theta \sim \iota$.
+\end{proof}
+
+\begin{proposition}
+	La \hyperref[Relation de permutation sur les préordres]{relation de permutation sur les préordres} peut être vue comme une permutation des choix.
+	\begin{equation}
+		\forall (\theta, \iota) \in \pO^2, \;
+		\theta \sim \iota \iff
+		\exists \sigma \in \mathfrak{S}_\C : \forall (A, B) \in \C^2,
+		\left[ A \succ_\theta B \!\iff\! \sigma(A) \succ_\iota \sigma(B) \right]
+	\end{equation}
+\end{proposition}
+
+\begin{exemple}
+	$(A > D > B = C > E) \sim (C > E > B = D > A)$
+\end{exemple}
+
+\begin{proof}
+	À faire
+\end{proof}
+
+%\begin{definition}
+%	\propriete{Relation de permutation sur les familles de préordres}
+%	\begin{equation}
+%		\begin{gathered}
+%			\forall (\theta, \iota) \in \left(\pO^E\right)^2, \;
+%			\theta \sim_\pO \iota \iff \\
+%			\exists \sigma \in \mathcal{S}_\C : \forall e \in E, \forall (A, B) \in \C^2,
+%			\left[ A \succ_{\theta_e} B \!\iff\! \sigma(A) \succ_{\iota_e} \sigma(B) \right]
+%		\end{gathered}
+%	\end{equation}
+%\end{definition}

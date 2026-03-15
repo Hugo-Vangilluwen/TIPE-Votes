@@ -1,0 +1,107 @@
+% !TeX root = TIPE_vangi.tex
+% !TeX spellcheck = fr
+
+\section{Systèmes de vote}
+
+Nous allons définir formellement les différents systèmes étudiés.
+
+\subsection{Votes pondérés}
+
+\begin{definition}
+	\propriete{Vote pondéré}
+	Un vote pondéré associe par chaque bulletin des points en fonction du classement de chaque choix. \\
+	Soit $\varphi : \mathbb{N} \rightarrow \mathbb{N}$. Considérons $\pi \in {\D}^\V$ un profil de préférence. Posons $p^\varphi$ les points d'un candidat.
+	\begin{equation*}
+		p_\pi^\varphi \
+		\left| \ \begin{matrix}
+			\C &\rightarrow& \mathbb{N} \\
+			A &\mapsto& \displaystyle \sum_{\theta \in \pi} \varphi \big( \left| \{ C \in \C \;|\; C \succ_\theta A \} \right| \big)
+		\end{matrix} \right.
+	\end{equation*}
+	  Définissons $\mathscr{P}^\varphi$ le système de vote pondéré associé.
+	\begin{equation}
+		\forall (A, B) \in \C^2, \
+		A \succ_{\mathscr{P}^\varphi(\pi)} B
+		\iff p_\pi^\varphi(A) \geqslant p_\pi^\varphi(B)
+	\end{equation}
+\end{definition}
+
+\begin{theoreme}
+	\propriete{Vote pondéré croissant}
+	Si $\varphi$ est croissante, alors $\mathscr{P}^\varphi$ respecte le critère de participation et celui d'unanimité (et de monotonie ???).
+\end{theoreme}
+
+\begin{proof}
+	À faire. \\
+	Je suis pas sûr pour la monotonie.
+\end{proof}
+
+\begin{definition}
+	\propriete{Scrutin uninominal}
+	Il consiste à mettre un seul choix sur le bulletin. Il est utilisé pour quasiment toutes les élections. Sur un bulletin, seul le premier choix a 1 point, les autres ont 0. C'est un vote pondéré dont la fonction est :
+	\begin{equation}
+		\left| \ \begin{matrix}
+			\mathbb{N} &\rightarrow& \mathbb{N} \\
+			n &\mapsto& \delta_{1, n}
+		\end{matrix} \right.
+	\end{equation}
+	Ce qui est bien croissant.
+\end{definition}
+
+\begin{definition}
+	\propriete{Méthode de Borda}
+	Il fut formalisé par Jean-Charles de Borda en 1770. Dans un bulletin, le premier candidat reçoit $|\C| - 1$ points, le second $|\C| - 2$ $\ldots$ et le dernier 0.
+	\begin{equation}
+		\left| \ \begin{matrix}
+			\mathbb{N} &\rightarrow& \mathbb{N} \\
+			n &\mapsto& |\C| - n
+		\end{matrix} \right.
+	\end{equation}
+	Ce qui est bien croissant.
+\end{definition}
+
+\begin{definition}
+	\propriete{Vote par approbation}
+	Sur son bulletin, chaque électeur inscrit les choix qu'il aime de façon désordonnée. Il donne 1 point aux choix inscrit et 0 aux autres. Ainsi, $\D = \{ \theta \in \pO \;|\; \left| \varXi_\theta(\C) \right| \leqslant 2 \}$. Donc pour un bulletin donné, il n'y a que deux valeurs de $\left| \{ C \in \C \;|\; C \succ_\theta A \} \right|$ possibles (dont $|\C|$). Ce système de vote est associé à :
+	\begin{equation}
+		\left| \ \begin{matrix}
+			\mathbb{N} &\rightarrow& \mathbb{N} \\
+			n &\mapsto& 1 - \delta_{|\C|, n}
+		\end{matrix} \right.
+	\end{equation}
+	Ce qui est bien croissant.
+\end{definition}
+
+\subsection{Scrutins de Condorcet}
+
+Marie Jean Antoine Nicolas de Caritat, marquis de Condorcet, dit Condorcet énonce le \hyperref[Critère de Condorcet]{critère de Condorcet} en 1785.
+Différents systèmes de vote furent proposés au fil des années pour résoudre le paradoxe de Condorcet (inexistence du vainqueur de Condorcet).
+
+\begin{definition}
+	\propriete{Scrutin de Condorcet}
+	Un système de vote est un scrutin de Condorcet si il respecte le \hyperref[Critère de Condorcet]{critère de Condorcet}.
+\end{definition}
+
+\begin{theoreme}
+	\propriete{Scrutin de Condorcet}
+	Tout scrutin de Condorcet respecte le critère d'unanimité.
+\end{theoreme}
+
+\begin{proof}
+	Si il existe un choix qui fait l'unanimité c'est-à-dire placé en premier dans tous les bulletins, alors c'est un vainqueur de Condorcet. Donc il est élu par tout scrutin de Condorcet.
+\end{proof}
+
+\begin{definition}
+	\propriete{Méthode Black}
+	Proposé en premier par Duncan Black, il consiste à élire le vainqueur de Condorcet, si il existe, et sinon appliquer la méthode Borda.
+\end{definition}
+
+\begin{definition}
+	\propriete{Méthode de Copenland}
+	Elle fut proposé pour la première fois par Ramon Llull en 1299. Elle consiste à donner des points pour chaque duels entre deux choix c'est-à-dire comparer $\left|\left\{ v \in \C \;|\; x \succ_{\theta_v} y \right\}\right|$ et $\left|\left\{ v \in \C \;|\; y \succ_{\theta_v} x \right\}\right|$ pour $(x, y) \in \C^2$. Le gagnant du duel a 1 point, le perdant 0 point et $\nicefrac{1}{2}$ en cas d'égalité. Le classement des choix se fait en fonction de la somme des points obtenus.
+\end{definition}
+
+\begin{definition}
+	\propriete{Méthode Schulze}
+	Ce système a été inventé par Markus Schulze en 1977 \cite{Schulze_method}. Cette méthode est utilisé par la SPI, Debian, Gentoo, Wikimedia, les partis pirate $\ldots$ Nous détaillerons pas ici l'algorithme.
+\end{definition}

@@ -1,0 +1,207 @@
+\documentclass[french,11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	top=2cm,
+	bottom=2cm,
+	right=3cm,
+	left=3cm
+}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{nicefrac}
+\usepackage{mathrsfs}
+
+\title{Recherches sur la manipulabilité}
+\author{hugo}
+
+
+\newtheorem{definition}{Définition}
+\newtheorem{theoreme}{Théorème}
+
+
+% Ensembles usuels en systèmes de votes
+\newcommand{\mc}[1]{\ensuremath{\mathcal{#1}} }  % mc pour MathCal
+
+
+\begin{document}
+	\maketitle
+	
+	\begin{definition}
+		\begin{equation}
+			\mathscr{S} : {\mc{D}_\mc{O}}^\mc{V} \rightarrow \mc{O}
+		\end{equation}
+		Avec $\mc{D}_\mc{O} \in \mc{P}(\mc{O})$. \\
+		Remarquons que le système peut être restreint à ${\mc{D}'_\mc{O}}^\mc{V}$ que l'on notera $\mathscr{S}_{|{\mc{D}_\mc{O}}}$. Par exemple, $\mathscr{S}_{|\mathfrak{O}}$. \\
+		Un système de vote ou système de choix social est :
+		\begin{itemize}
+			\item impartial pour les votants si le résultat est invariant par permutation des votants
+			\item impartial pour les choix si le résultat est invariant par permutation des choix
+			\item  impartial si il est impartial pour les votants et pour les choix
+		\end{itemize}
+	\end{definition}
+	
+	\begin{definition}
+		Toute relation de préordre induit une relation d'ordre sur l'ensemble des parties choix $\mathcal{P(C)}$. \newline
+		Soient $\theta \in \mc{O}$ et $(E,F) \in \mc{P(C)}^2$. Notons $A = \max_\theta E \!\setminus\! (E \cap F)$ et $B = \max_\theta F \!\setminus\! (E \cap F)$ (sous réserve de non-vacuité) (le maximum est un élément quelconque de l'ensemble des majorants).
+		\begin{equation}
+			E \succ_\theta F \iff
+			\left\{ \begin{matrix}
+				Vrai &si \ F = \emptyset \\
+				Faux &si \ E = \emptyset \ et \ F \neq \emptyset \\
+				A \succ_\theta B &si \ A \neq B \\
+				E \!\setminus\! \{A\} \succ_\theta F \!\setminus\! \{B\} &si \ A = B
+			\end{matrix} \right.
+		\end{equation}
+	\end{definition}
+	
+	\begin{proof}
+		Cette relation est bien une relation d'ordre/de préordre.
+	\end{proof}
+	
+	\begin{definition}
+		Toute relation de préordre induit une relation d'ordre sur l'ensemble des préordres \mc{O}. Soient $\theta \in \mc{O}$ et $(\iota, \kappa) \in \mc{O}^2$
+		\begin{equation}
+			\iota \succ_\theta \kappa \iff
+			\left\{ \begin{matrix}
+				Vrai &si \ C = \emptyset \\
+				M_\iota(\mc{C}) \succ_\theta M_\kappa(\mc{C}) &si \ M_\iota(\mc{C}) \neq M_\kappa(\mc{C}) \\
+				\iota_{|\mc{C} \setminus M_\iota(\mc{C})} \succ_\theta \kappa_{|\mc{C} \setminus M_\kappa(\mc{C})} &si \ M_\iota(\mc{C}) = M_\kappa(\mc{C})
+			\end{matrix} \right.
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}
+		\begin{equation}
+			m_{\mc{C}} \left( \mc{V}, \mc{W} \right) =
+			\frac{\left|\left\{ (\theta,\iota) \in \mc{O}^\mc{V} \times \mc{O} \;|\; \exists \iota' \in \mc{O}^\mc{W} : \mathscr{S} (\theta \sqcup \iota') \succnsim_\iota \mathscr{S}(\theta \sqcup \tilde{\iota} \right\}\right|}
+			{\left| \mc{O}^\mc{C} \times \mc{O} \right|}
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}
+		\begin{equation}
+			\forall \left(x,y\right) \in \left(E^F\right)^2\!, \;
+			x \sim y
+			\iff \exists \sigma \in \mc{S}_F : x = \left(y_{\sigma(f)}\right)_{f \in F}
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}
+		\begin{equation}
+			\forall \left(\pi,\pi'\right) \in \left(\mc{O}^\mc{V}\right)^2\!, \;
+			\pi \sim \pi'
+			\iff \exists \sigma \in \mc{S}_\mc{V} : \pi = \left(\pi'_{\sigma(v)}\right)_{v \in \mc{V}}
+		\end{equation}
+	\end{definition}
+	
+	\begin{proof}
+		$\sim$ est une relation d'équivalence. \\
+		Notons $S$ un système de représentant de $\nicefrac{{\mc{D}_\mc{O}}^\mc{V}}{\sim}$. En particulier, $\nicefrac{\mathfrak{O}^\mc{V}}{\sim} = \{\{\mathfrak{O}\}\}$. \\
+		\mc{O} peut être vu comme une partie de $\mc{P}(\mc{C}^2)$ (et alors ???). Notons $T$ un système de représentant de $\nicefrac{\mc{O}}{\sim}$.
+	\end{proof}
+	
+	\begin{definition}
+		\begin{equation}
+			\forall (\theta, \theta') \in \mc{O}^2, \;
+			\theta \sim \theta' \iff
+			\exists \sigma \in \mc{S}_\mc{V} : \forall (A, B) \in \mc{C}^2,
+			\left[ A \succ_\theta B \!\iff\! \sigma(A) \succ_{\theta'} \sigma(B) \right]
+		\end{equation}
+	\end{definition}
+	
+	\begin{theoreme}
+		\underline{invariance par impartialité} \\
+		Soit $\mathscr{S}$ un système de vote impartial.
+		\begin{equation}
+			m_{\mc{C}} \left( \mc{V}, \mc{W} \right) =
+			\frac{1}{\left|\mc{O}\right|^{\left|\mc{V}\right|+1}}
+			\sum_{\iota \in S} \left|\bar{\iota}\right|
+			\left| \left\{
+				\theta \in \mc{O}^\mc{V} \;|\;
+				\exists \iota' \in \mc{O}^\mc{W} : \mathscr{S} (\theta \sqcup \iota') \succnsim_\iota \mathscr{S}(\theta \sqcup \tilde{\iota})
+			\right\} \right|
+		\end{equation}
+	\end{theoreme}
+	
+	\begin{definition} \textit{très générale}
+		\begin{equation}
+			m (\mc{V}, E, \mc{R}) =
+			\frac{
+				\left|\left\{
+					(\theta, \iota) \in \mc{O}^\mc{V} \times E \;|\;
+					\theta \;\mc{R}\; \iota
+				\right\}\right|
+			}{
+				\left| \mc{O}^\mc{V} \times E \right|
+			}
+		\end{equation}
+	\end{definition}
+	
+	\begin{theoreme}
+		\underline{invariance par impartialité} \\
+		Soit $\mathscr{S}$ un système de vote impartial.
+		\begin{equation}
+			m (\mc{V}, E, \mc{R}) =
+			\frac{1}{ \left|\mc{O}\right|^{\left|\mc{V}\right|} \left|E\right| }
+			\sum_{\iota \in T} \left|\bar{\iota}\right|
+			\left(
+				\sum_{\theta \in S} 
+				\left\{\begin{matrix}
+					\left|\bar{\theta}\right| &\text{ si } \theta \;\mc{R}\; \iota \\
+					0 &\text{ sinon}
+				\end{matrix}\right.
+			\right)
+		\end{equation}
+	\end{theoreme}
+	
+	\begin{theoreme}
+		\begin{equation}
+			m_\mathfrak{O}(\mc{V}, E, \mc{R}) = 
+			\frac{1}{ 2^{|\mc{C}| \times |\mc{V}|} \cdot |E| }
+			\sum_{\iota \in T} \left|\bar{\iota}\right|
+			\left(
+			\sum_{\theta \in S} 
+			\left\{\begin{matrix}
+				\left|\bar{\theta}\right| &\text{ si } \theta \;\mc{R}\; \iota \\
+				0 &\text{ sinon}
+			\end{matrix}\right.
+			\right)
+		\end{equation}
+	\end{theoreme}
+	
+	\begin{definition}
+		\begin{equation}
+			\forall \left(A,B\right) \in \mc{C}^2\!, \;
+			A \asymp B
+			\iff A \succ_\theta B \wedge B \succ_\theta A
+		\end{equation}
+		$\asymp$ est une relation d'équivalence. Notons $S'_\theta$ un système de représentant.
+	\end{definition}
+	
+	\begin{theoreme}
+		\begin{equation}
+			\left| \mc{O} \right|
+			= \sum_{\iota \in S} \left|\bar{\iota}\right|
+				= \sum_{\iota \in S} \frac{
+					\left|\mc{C}\right| !
+				}{ \displaystyle
+					\prod_{A \in S'_\iota} \left|\bar{A}\right| !
+				}
+		\end{equation}
+	\end{theoreme}
+	
+	\begin{definition}
+		\underline{Critère d'honnêteté}
+		\begin{equation}
+			\forall \iota' \in \mc{O}^\mc{W} : \mathscr{S}(\theta \sqcup \tilde{\iota}) \succ_\iota \mathscr{S} (\theta \sqcup \iota')
+		\end{equation}
+	\end{definition}
+\end{document}

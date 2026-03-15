@@ -1,0 +1,27 @@
+% !TeX root = TIPE_vangi.tex
+% !TeX spellcheck = fr
+
+\section{Conclusion}
+
+Nous avons travaillé sur les relations de préordres pour finalement définir un relation induite sur les relations de préordres. Ainsi, nous avons pu comparé les résultats d'un vote du point de vue d'un électeur quelconque. Ce qui nous a permis de savoir s'il est intéressant pour cet électeur d'être honnête ou de participer.
+
+\textit{La méthode Borda} possède toujours une probabilité inférieure aux autres systèmes de vote (excepté pour l'unicité du vainqueur). C'est le pire système.
+\textit{La méthode Black}, par le simple ajout de la recherche de l'existence d'un vainqueur de Condorcet, augment considérablement l'honnêteté qui devient meilleure que celle du \textit{scrutin uninominal}. Elle se comporte plutôt bien lors de l'ajout de choix et sur les préordres, mieux que \textit{La méthode de Copeland}.
+
+\textit{La méthode de Copeland} et \textit{la méthode de Schulze} possédent les meilleures probabilités et respectent le critères de Condorcet : ce qui fait d'elles, les meilleurs systèmes parmi ceux étudiés. De plus, elles ont la même complexité temporelle $O(|\V|^2)$. Certes \textit{la méthode de Copeland} se distingue en ayant plus souvent un unique vainqueur mais \textit{la méthode de Schulze} possède un meilleur comportement vis-à-vis de l'ajout d'un candidat et des préférences décrites comme des préordres.
+
+En plus de permettre aux électeurs une meilleur expression de leur opinion, les relations de préordres ont des courbes plus "lisses" que celles des relations d'ordres. D'ailleurs les axiomes de Von Neumann–Morgenstern posent que les opinions sont des relations de préordres. Ainsi, elles semblent plus naturelles et mieux décrire les opinions individuelles. Mais leurs courbes sont en-dessous de celles des relations d'ordre pour la probabilité d'honnêteté.
+
+\bigbreak\bigbreak
+
+\textbf{À faire} \\
+Finir les preuves. \\
+Commenter les graphiques et choisir les plus pertinents pour enlever les autres. \\
+Expliquer en quoi le critère d'honnêteté est le plus important. \\
+Calculer la complexité de l'algorithme. \\
+
+\textbf{Pistes à creuser} \\
+Étendre le calcul de la probabilité au vote par meilleur médiane (et aux systèmes de vote aléatoires). \\
+Trouver un lien entre critère individuels et collectif. \\
+Effectuer un travail empirique \\
+Calculer littéralement la probabilité pour des systèmes et des critères simples.
